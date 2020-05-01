@@ -19,6 +19,7 @@ namespace Augmen1.Models
         {
             ListOfExercises = new List<ExerciseInstance>();
             Name = name;
+            WorkoutID = new Random().Next();
         }
 
         public void AddExercise(ExerciseInstance exercise)

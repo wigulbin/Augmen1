@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 
@@ -26,6 +27,17 @@ namespace Augmen1.Models
             this.Weight = weight;
             this.TypeOfLift = typeoflift;
             this.BaseExercise = exercise;
+        }
+    }
+
+
+    public class GroupedExerciseModel : ObservableCollection<ExerciseInstance>
+    {
+        public string Name { get; set; }
+
+        public GroupedExerciseModel(string name)
+        {
+            Name = name;
         }
     }
 }

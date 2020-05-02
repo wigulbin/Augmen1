@@ -18,6 +18,9 @@ namespace Augmen1.Models
         public double Weight { get; set; }
         public string TypeOfLift { get; set; }
         public Exercise BaseExercise { get; set; }
+        public string ExerciseName => BaseExercise.Name;
+
+
 
 
         public ExerciseInstance(Exercise exercise, double resttime, double weight, string typeoflift)

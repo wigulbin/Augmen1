@@ -5,42 +5,24 @@ using System.Text;
 
 namespace Augmen1.Models
 {
-    public class Workout
+    public class Workout : List<ExerciseInstance>
     {
         public string Name { get; set; }
         public int WorkoutID { get; }
-        public List<ExerciseInstance> ListOfExercises { get; set; }
-
-        public Workout()
-        {
-            ListOfExercises = new List<ExerciseInstance>();
-        }
-        public Workout(string name)
-        {
-            ListOfExercises = new List<ExerciseInstance>();
-            Name = name;
-        }
+        public List<ExerciseInstance> ListOfExercises => this;
 
         public void AddExercise(ExerciseInstance exercise)
         {
             ListOfExercises.Add(exercise);
         }
 
-        public List<ExerciseInstance> GetExercise(string name)
+        public List<string> GetAllExerciseNames()
         {
             var x = from exercise in ListOfExercises
-                    where exercise.BaseExercise.Name == name
-                    select exercise;
+                    select exercise.BaseExercise.Name;
             return x.ToList();
-
-            //foreach (var exercise in ListOfExercises)
-            //{
-            //    if (exercise.BaseExercise.Name == name)
-            //    {
-            //        return exercise;
-            //    }
-            //}
-            //return null;
         }
+
+
     }
 }

@@ -11,6 +11,8 @@ using Augmen1.Testing;
 
 namespace Augmen1
 {
+
+
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class WorkoutsPage : ContentPage
     {
@@ -21,12 +23,12 @@ namespace Augmen1
         protected override void OnAppearing()
         {
             base.OnAppearing();
-
             var routine = new Routine();
 
-            var workouts = Generator.workouts();
+            var workoutsGen = Generator.workouts();
 
-            workoutView.ItemsSource = workouts;
+            GroupedView.ItemsSource = workoutsGen;
+
         }
 
 

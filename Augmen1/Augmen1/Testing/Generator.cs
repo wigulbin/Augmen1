@@ -21,19 +21,18 @@ namespace Augmen1.Testing
             var ei2 = new ExerciseInstance(bench, 1.45, 135, "Secondary");
             var ei3 = new ExerciseInstance(pushup, 1.00, 0, "Tertiary");
 
-            var workout = new Workout("Workout1")
+            var workout = new Workout()
             {
-                ListOfExercises = new List<ExerciseInstance>
-                {
-                    ei1,
-                    ei2,
-                    ei3
-                }
+                ei1,
+                ei2,
+                ei3
             };
+            workout.Name = "Workout 1";
 
-            var workout2 = new Workout("Workout2");
+            var workout2 = new Workout();
             workout2.AddExercise(ei2);
             workout2.AddExercise(ei1);
+            workout2.Name = "Workout2";
             var curWorkout = workout.ListOfExercises;
             var listofworkouts = new Routine();
             listofworkouts.AddWorkout(workout);
@@ -44,5 +43,6 @@ namespace Augmen1.Testing
 
             return workouts;
         }
+
     }
 }

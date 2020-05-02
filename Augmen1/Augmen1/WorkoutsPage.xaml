@@ -9,7 +9,7 @@
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="+"
-                     Clicked="OnNoteAddedClicked" />
+                     Clicked="OnWorkoutAddedClicked" />
     </ContentPage.ToolbarItems>
     <!--<ListView x:Name="listView"
               Margin="20"
@@ -22,10 +22,14 @@
         </ListView.ItemTemplate>
     </ListView>-->
     <ListView x:Name="listView"
-              IsGroupingEnabled="True"
-              GroupDisplayBinding="{Binding Name}"
-              GroupShortNameBinding="{Binding Name}">
-
+              IsGroupingEnabled="True">
+        <ListView.GroupHeaderTemplate>
+            <DataTemplate>
+                <ViewCell Tapped="OnWorkoutClick">
+                    <Label Text="{Binding Name}" />
+                </ViewCell>
+            </DataTemplate>
+        </ListView.GroupHeaderTemplate>
         <ListView.ItemTemplate>
             <DataTemplate>
                 <TextCell Text="{Binding TypeOfLift}" Detail = "{Binding TypeOfLift}" />

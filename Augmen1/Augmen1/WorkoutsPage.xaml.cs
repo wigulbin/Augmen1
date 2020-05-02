@@ -22,15 +22,7 @@ namespace Augmen1
         {
 
             InitializeComponent();
-            workoutModels = new ObservableCollection<GroupedExerciseModel>();
-            var workouts = Generator.workouts();
-
-            workouts.ForEach(workout => {
-                var groupedExercise = new GroupedExerciseModel(workout.Name);
-                workout.ListOfExercises.ForEach(exercise => groupedExercise.Add(exercise));
-
-                workoutModels.Add(groupedExercise);
-            });
+            updateWorkouts();
 
             listView.ItemsSource = workoutModels;
         }
@@ -38,18 +30,39 @@ namespace Augmen1
         {
             base.OnAppearing();
 
-            var routine = new Routine();
+            updateWorkouts();
 
-            
+            listView.ItemsSource = workoutModels;
+
         }
 
-
-        async void OnNoteAddedClicked(object sender, EventArgs e)
+        async protected void OnWorkoutClick(object sender, EventArgs e)
         {
-            //await Navigation.PushAsync(new NoteEntryPage
-            //{
-            //    BindingContext = new Note()
-            //});
+            await Navigation.PushAsync(new WorkoutEntryPage()
+            {
+                BindingContext = new Workout()
+            });
+        }
+
+        private void updateWorkouts()
+        {
+            workoutModels = new ObservableCollection<GroupedExerciseModel>();
+            var workouts = Generator.getWorkouts();
+
+            workouts.ForEach(workout => {
+                var groupedExercise = new GroupedExerciseModel(workout.Name);
+                workout.ListOfExercises.ForEach(exercise => groupedExercise.Add(exercise));
+
+                workoutModels.Add(groupedExercise);
+            });
+        }
+
+        async void OnWorkoutAddedClicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new WorkoutEntryPage()
+            {
+                BindingContext = new Workout()
+            });
         }
 
         async void OnListViewItemSelected(object sender, SelectedItemChangedEventArgs e)

@@ -7,7 +7,22 @@ namespace Augmen1.Testing
 {
     class Generator
     {
+        private static List<Workout> generatedWorkouts;
 
+        public static List<Workout> getWorkouts()
+        {
+            if(generatedWorkouts == null)
+                generatedWorkouts = workouts();
+
+            return generatedWorkouts;
+        }
+
+        public static List<Workout> addWorkout(Workout workout)
+        {
+            List<Workout> workouts = getWorkouts();
+            workouts.Add(workout);
+            return workouts;
+        }
         public static List<Workout> workouts()
         {
             var workouts = new List<Workout>();

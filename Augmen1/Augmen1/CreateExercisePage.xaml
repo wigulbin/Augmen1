@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="Augmen1.CreateExercisePage">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Create an exercise"/>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <StackLayout Margin="10">
+            <Editor Placeholder="Enter name of exercise:"
+                    x:Name="ExerciseName"
+                Text="{Binding Name}"/>
+            <Picker Title="Body Part"
+                    x:Name="BodyPartPicker">
+                <Picker.Items>
+                    <x:String>Legs</x:String>
+                    <x:String>Arms</x:String>
+                    <x:String>Back</x:String>
+                    <x:String>Chest</x:String>
+                </Picker.Items>
+            </Picker>
+            <Picker Title="Type of exercise"
+                    x:Name="TypePicker">
+                <Picker.Items>
+                    <x:String>Dumbbell</x:String>
+                    <x:String>Barbell</x:String>
+                    <x:String>Bodyweight</x:String>
+                    <x:String>Cable</x:String>
+                </Picker.Items>
+            </Picker>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Button Text="Save"
+                    Clicked="OnSaveButtonClicked" />
+                <Button Grid.Column="1"
+                    Text="Delete"
+                    Clicked="OnDeleteButtonClicked"/>
+            </Grid>
+            <ListView x:Name="Exercises"
+                      Margin="20"
+                      Header="Current Exercises:">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextCell Text="{Binding .}" />
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

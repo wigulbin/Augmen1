@@ -12,14 +12,11 @@ namespace Augmen1.Models
         public string Type { get; set; }
         public string BodyPart { get; set; }
 
-        public Exercise()
-        {
-
-        }
 
         public Exercise(Exercise exercise)
         {
             this.Name = exercise.Name;
+             
         }
 
         public Exercise(string Name, string Type, string BodyPart)
@@ -27,6 +24,10 @@ namespace Augmen1.Models
             this.Name = Name;
             this.Type = Type;
             this.BodyPart = BodyPart;
+        }
+
+        public Exercise()
+        {
         }
     }
 }

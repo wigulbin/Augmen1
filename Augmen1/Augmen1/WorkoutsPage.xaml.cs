@@ -32,12 +32,12 @@ namespace Augmen1
         }
 
 
-        async void OnNoteAddedClicked(object sender, EventArgs e)
+        async void OnExerciseAddedClicked(object sender, EventArgs e)
         {
-            //await Navigation.PushAsync(new NoteEntryPage
-            //{
-            //    BindingContext = new Note()
-            //});
+            await Navigation.PushAsync(new CreateExercisePage
+            {
+                BindingContext = new Exercise()
+            });
         }
 
         async void OnListViewItemSelected(object sender, SelectedItemChangedEventArgs e)

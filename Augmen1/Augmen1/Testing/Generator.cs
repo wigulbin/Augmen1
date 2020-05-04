@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Augmen1.Models;
+using Augmen1.Repositories;
 
 namespace Augmen1.Testing
 {
@@ -12,14 +13,18 @@ namespace Augmen1.Testing
         {
             var workouts = new List<Workout>();
 
-            var squat = new Exercise("Squat", "Barbell", "Legs");
-            var bench = new Exercise("Bench Press", "Dumbbell", "Chest");
-            var pushup = new Exercise("Push Up", "Bodyweight", "Chest");
-            var deadlift = new Exercise("Deadlift", "Barbell", "Legs");
+            if (ExerciseRepository.length() == 0)
+            {
+                ExerciseRepository.add(new Exercise("Squat", "Barbell", "Legs"));
+                ExerciseRepository.add(new Exercise("Bench Press", "Dumbbell", "Chest"));
+                ExerciseRepository.add(new Exercise("Push Up", "Bodyweight", "Chest"));
+                ExerciseRepository.add(new Exercise("Deadlift", "Barbell", "Legs"));
+            }
 
-            var ei1 = new ExerciseInstance(squat, 1.30, 225, "Primary");
-            var ei2 = new ExerciseInstance(bench, 1.45, 135, "Secondary");
-            var ei3 = new ExerciseInstance(pushup, 1.00, 0, "Tertiary");
+
+            var ei1 = new ExerciseInstance(ExerciseRepository.retrieve("Squat"), 1.30, 225, "Primary");
+            var ei2 = new ExerciseInstance(ExerciseRepository.retrieve("Bench Press"), 1.45, 135, "Secondary");
+            var ei3 = new ExerciseInstance(ExerciseRepository.retrieve("Push Up"), 1.00, 0, "Tertiary");
 
             var workout = new Workout()
             {

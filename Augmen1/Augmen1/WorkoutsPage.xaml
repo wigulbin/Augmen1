@@ -9,27 +9,22 @@
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="+"
-                     Clicked="OnNoteAddedClicked" />
+                     Clicked="OnExerciseAddedClicked" />
     </ContentPage.ToolbarItems>
-
-    <!--<ListView x:Name="WorkoutView"
-              ItemsSource="{Binding workouts}">
-        <ListView.ItemTemplate>
-            <DataTemplate>
-                <TextCell Text="{Binding WorkoutName}" 
-                          Detail="{Binding ListOfExerciseNames}"/>
-            </DataTemplate>
-        </ListView.ItemTemplate>
-    </ListView>-->
-
-    <ListView x:Name="GroupedView"
+    <ContentPage.Content>
+        <StackLayout>
+            <ListView x:Name="GroupedView"
               GroupDisplayBinding="{Binding Name}"
               IsGroupingEnabled="true">
-        <ListView.ItemTemplate>
-            <DataTemplate>
-                <TextCell Text="{Binding ExerciseName}"
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextCell Text="{Binding ExerciseName}"
                           Detail="{Binding TypeOfLift}"/>
-            </DataTemplate>
-        </ListView.ItemTemplate>
-    </ListView>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+        </StackLayout>
+    </ContentPage.Content>
+
 </ContentPage>

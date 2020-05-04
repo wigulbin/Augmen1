@@ -15,14 +15,24 @@ namespace Augmen1.Models
                 return ExerciseAppID;
             }
         }
-        public double RestTime { get; set; }
+        public TimeSpan RestTime { get; set; }
         public double Weight { get; set; }
         public string TypeOfLift { get; set; }
         public Exercise BaseExercise { get; set; }
+        public string ExerciseName => BaseExercise.Name;
+        public int WorkoutID { get; set; }
+        public int ExerciseID { get; set; }
 
 
-        public ExerciseInstance(Exercise exercise, double resttime, double weight, string typeoflift)
+        public ExerciseInstance(int workoutID)
         {
+            this.ExerciseID = new Random().Next();
+            this.WorkoutID = workoutID;
+        }
+        public ExerciseInstance(int workoutID, Exercise exercise, TimeSpan resttime, double weight, string typeoflift)
+        {
+            this.ExerciseID = new Random().Next();
+            this.WorkoutID = workoutID;
             this.RestTime = resttime;
             this.Weight = weight;
             this.TypeOfLift = typeoflift;

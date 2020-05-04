@@ -17,6 +17,16 @@ namespace Augmen1.Models
 
         }
 
+        public static List<String> getExercises()
+        {
+            return new List<string>()
+            {
+                "Squat",
+                "Bench Press",
+                "Push Up"
+            };
+        }
+
         public Exercise(Exercise exercise)
         {
             this.Name = exercise.Name;

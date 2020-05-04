@@ -11,45 +11,22 @@
         <ToolbarItem Text="+"
                      Clicked="OnWorkoutAddedClicked" />
     </ContentPage.ToolbarItems>
-    <!--<ListView x:Name="listView"
-              Margin="20"
-              ItemSelected="OnListViewItemSelected">
-        <ListView.ItemTemplate>
-            <DataTemplate>
-                <TextCell Text="{Binding Name}"
-                          Detail="{Binding WorkoutData}" />
-            </DataTemplate>
-        </ListView.ItemTemplate>
-    </ListView>-->
+
     <ListView x:Name="listView"
-              IsGroupingEnabled="True">
+              IsGroupingEnabled="True"
+              ItemSelected="OnListViewItemSelected">
         <ListView.GroupHeaderTemplate>
             <DataTemplate>
                 <ViewCell Tapped="OnWorkoutClick">
-                    <Label Text="{Binding Name}" />
+                    <Label Text="{Binding Name}"/>
                 </ViewCell>
             </DataTemplate>
         </ListView.GroupHeaderTemplate>
         <ListView.ItemTemplate>
             <DataTemplate>
-                <TextCell Text="{Binding TypeOfLift}" Detail = "{Binding TypeOfLift}" />
+                <TextCell Text="{Binding ExerciseName}" Detail = "{Binding TypeOfLift}" />
             </DataTemplate>
         </ListView.ItemTemplate>
     </ListView>
 
-    <!--<ListView ItemsSource="{Binding WorkoutData}"></ListView>-->
-    <!--<ListView x:Name="listView"
-          IsGroupingEnabled="true"
-              GroupDisplayBinding="{Binding Name}"
-              GroupShortNameBinding="{Binding Name}">
-
-        <ListView.ItemTemplate>
-            <DataTemplate>
-                <ViewCell>
-                    <Label Text="{Binding TypeOfLift}" />
-                </ViewCell>
-            </DataTemplate>
-        </ListView.ItemTemplate>
-    </ListView>-->
-    
 </ContentPage>

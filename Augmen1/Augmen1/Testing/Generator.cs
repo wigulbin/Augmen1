@@ -1,29 +1,44 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Linq;
 using System.Text;
 using Augmen1.Models;
+using Xamarin.Forms.Internals;
 
 namespace Augmen1.Testing
 {
     class Generator
     {
-        private static List<Workout> generatedWorkouts;
+        private static Dictionary<int, Workout> generatedWorkouts;
 
         public static List<Workout> getWorkouts()
         {
-            if(generatedWorkouts == null)
-                generatedWorkouts = workouts();
-
-            return generatedWorkouts;
+            if (generatedWorkouts == null)
+            {
+                var workoutList = workouts();
+                generatedWorkouts = new Dictionary<int, Workout>();
+                workoutList.ForEach(workout => generatedWorkouts.Add(workout.WorkoutID, workout));
+                
+            }
+            var allWorkouts = new List<Workout>();
+            generatedWorkouts.Values.ForEach(workout => allWorkouts.Add(workout));
+            return allWorkouts.OrderBy(w => w.WorkoutID).ToList();
         }
 
         public static List<Workout> addWorkout(Workout workout)
         {
-            List<Workout> workouts = getWorkouts();
-            workouts.Add(workout);
-            return workouts;
+            generatedWorkouts.Add(workout.WorkoutID, workout);
+
+          
+            return getWorkouts();
         }
-        public static List<Workout> workouts()
+
+        public static Workout getWorkout(int workoutID)
+        {
+            return generatedWorkouts[workoutID];
+        }
+        private static List<Workout> workouts()
         {
             var workouts = new List<Workout>();
 
@@ -32,19 +47,15 @@ namespace Augmen1.Testing
             var pushup = new Exercise("Push Up", "Bodyweight", "Chest");
             var deadlift = new Exercise("Deadlift", "Barbell", "Legs");
 
-            var ei1 = new ExerciseInstance(squat, 1.30, 225, "Primary");
-            var ei2 = new ExerciseInstance(bench, 1.45, 135, "Secondary");
-            var ei3 = new ExerciseInstance(pushup, 1.00, 0, "Tertiary");
+            var workout = new Workout("Workout1");
 
-            var workout = new Workout("Workout1")
-            {
-                ListOfExercises = new List<ExerciseInstance>
-                {
-                    ei1,
-                    ei2,
-                    ei3
-                }
-            };
+            var ei1 = new ExerciseInstance(workout.WorkoutID, squat, new TimeSpan(0, 1, 30), 225, "Primary");
+            var ei2 = new ExerciseInstance(workout.WorkoutID, bench, new TimeSpan(0, 1, 45), 135, "Secondary");
+            var ei3 = new ExerciseInstance(workout.WorkoutID, pushup, new TimeSpan(0, 1, 0), 0, "Tertiary");
+
+            workout.AddExercise(ei1);
+            workout.AddExercise(ei2);
+            workout.AddExercise(ei3);
 
             var workout2 = new Workout("Workout2");
             workout2.AddExercise(ei2);

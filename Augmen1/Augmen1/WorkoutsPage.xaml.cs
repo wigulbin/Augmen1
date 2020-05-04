@@ -67,13 +67,13 @@ namespace Augmen1
 
         async void OnListViewItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-            //if (e.SelectedItem != null)
-            //{
-            //    await Navigation.PushAsync(new NoteEntryPage
-            //    {
-            //        BindingContext = e.SelectedItem as Note
-            //    });
-            //}
+            if (e.SelectedItem != null)
+            {
+                await Navigation.PushAsync(new ExerciseEntryPage
+                {
+                    BindingContext = e.SelectedItem as ExerciseInstance
+                });
+            }
         }
     }
 }

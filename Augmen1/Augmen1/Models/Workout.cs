@@ -10,6 +10,7 @@ namespace Augmen1.Models
         public string Name { get; set; }
         public int WorkoutID { get; }
         public List<ExerciseInstance> ListOfExercises { get; set; }
+        public int sequence { get; set; }
 
         public Workout()
         {
@@ -25,6 +26,18 @@ namespace Augmen1.Models
         public void AddExercise(ExerciseInstance exercise)
         {
             ListOfExercises.Add(exercise);
+        }
+
+        public void UpdateExercise(ExerciseInstance instance)
+        {
+            var index = ListOfExercises.FindIndex(e => e.ExerciseID == instance.ExerciseID);
+
+            if (index > -1)
+            {
+                var oldInstance = ListOfExercises[index];
+                instance.ExerciseID = oldInstance.ExerciseID;
+                ListOfExercises[index] = instance;
+            }
         }
 
         public List<ExerciseInstance> GetExercise(string name)

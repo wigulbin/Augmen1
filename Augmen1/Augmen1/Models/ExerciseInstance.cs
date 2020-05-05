@@ -11,18 +11,16 @@ namespace Augmen1.Models
 {
     public class ExerciseInstance
     {
-        public int ExerciseAppID
-        {
-            get
-            {
-                return ExerciseAppID;
-            }
-        }
-        public TimeSpan RestTime { get; set; }
-        public double Weight { get; set; }
-        public string TypeOfLift { get; set; }
         public Exercise BaseExercise { get; set; }
         public string ExerciseName => BaseExercise.Name;
+        public string ExerciseInstanceName => $"{EquipNeeded} {BaseExercise.Name}";
+        public List<Tuple<int, int>> SetsReps { get; set; }
+        public double Weight { get; set; }
+        public TimeSpan RestTime { get; set; }
+        public string EquipNeeded { get; set; }
+
+
+
         public int WorkoutID { get; set; }
         public int ExerciseID { get; set; }
 
@@ -32,13 +30,22 @@ namespace Augmen1.Models
             this.ExerciseID = new Random().Next();
             this.WorkoutID = workoutID;
         }
-        public ExerciseInstance(int workoutID, Exercise exercise, TimeSpan resttime, double weight, string typeoflift)
+
+        public ExerciseInstance(int workoutID, Exercise exercise, TimeSpan resttime, string EquipNeeded)
         {
             this.ExerciseID = new Random().Next();
             this.WorkoutID = workoutID;
             this.RestTime = resttime;
-            this.Weight = weight;
-            this.TypeOfLift = typeoflift;
+            this.EquipNeeded = EquipNeeded;
+            this.BaseExercise = exercise;
+        }
+
+        public ExerciseInstance(int workoutID, Exercise exercise, string EquipNeeded)
+        {
+            this.ExerciseID = new Random().Next();
+            this.WorkoutID = workoutID;
+            this.RestTime = exercise.DefaultRestTime;
+            this.EquipNeeded = EquipNeeded;
             this.BaseExercise = exercise;
         }
     }

@@ -9,8 +9,10 @@ namespace Augmen1.Models
     {
         public string Name { get; set; }
         public int ExerciseID { get; }
-        public string Type { get; set; }
+        public List<string> EquipNeeded { get; set; }
         public string BodyPart { get; set; }
+        public string TypeOfLift { get; set; }
+        public TimeSpan DefaultRestTime { get; set; }
 
         public Exercise()
         {
@@ -32,11 +34,20 @@ namespace Augmen1.Models
             this.Name = exercise.Name;
         }
 
-        public Exercise(string Name, string Type, string BodyPart)
+        public Exercise(string Name, List<string> EquipNeeded, string BodyPart)
         {
             this.Name = Name;
-            this.Type = Type;
+            this.EquipNeeded = EquipNeeded;
             this.BodyPart = BodyPart;
+            this.DefaultRestTime = new TimeSpan(0, 2, 0);
+        }
+
+        public Exercise(string Name, List<string> EquipNeeded, string BodyPart, TimeSpan resttime)
+        {
+            this.Name = Name;
+            this.EquipNeeded = EquipNeeded;
+            this.BodyPart = BodyPart;
+            this.DefaultRestTime = resttime;
         }
     }
 }

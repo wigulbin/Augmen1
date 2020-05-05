@@ -8,6 +8,9 @@
              Title="Workouts">
 
     <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Add Exercise"
+                     Clicked="OnExerciseAddedClicked" />
+        <ToolbarItem Text="|" />
         <ToolbarItem Text="+"
                      Clicked="OnWorkoutAddedClicked" />
     </ContentPage.ToolbarItems>
@@ -36,9 +39,8 @@
         </ListView.GroupHeaderTemplate>
         <ListView.ItemTemplate>
             <DataTemplate>
-                <TextCell Text="{Binding ExerciseName}" Detail = "{Binding TypeOfLift}" />
+                <TextCell Text="{Binding ExerciseInstanceName}" />
             </DataTemplate>
         </ListView.ItemTemplate>
     </ListView>
-
 </ContentPage>

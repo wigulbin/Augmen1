@@ -4,21 +4,31 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="Augmen1.ExerciseEntryPage">
+             x:Class="Augmen1.ExerciseEntryPage"
+             Title="{Binding ExerciseName}">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="+"
                      Clicked="OnExerciseAddedClicked" />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>
-            <Editor Placeholder="Enter your Workout name"
-                Text="{Binding ExerciseName}"
-                HeightRequest="50" />
-            <TimePicker Time="{Binding RestTime}" />
-            <Editor Placeholder="Enter your Workout name"
-                Text="{Binding TypeOfLift}"
-                HeightRequest="50" />
-            <Picker x:Name="exercisePicker"/>
+
+            <FlexLayout 
+                Direction="Row" 
+                FlexLayout.Grow="1"
+                JustifyContent="Center">
+                <Label FontSize="Medium" Text="Rest Time:" VerticalTextAlignment="Center"/>
+                <TimePicker Time="{Binding RestTime}" />
+            </FlexLayout>
+
+            <FlexLayout 
+                Direction="Row" 
+                FlexLayout.Grow="1"
+                JustifyContent="Center">
+                <Label FontSize="Medium" Text="Excercise:" VerticalTextAlignment="Center"/>
+                <Picker WidthRequest="200" x:Name="exercisePicker" SelectedItem="{Binding ExerciseName, Mode=TwoWay}" HorizontalOptions="Center"/>
+            </FlexLayout>
+            
             <Button Text="Save"
                 VerticalOptions="CenterAndExpand"
                 HorizontalOptions="Center"

@@ -5,9 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="Augmen1.CreateExercisePage">
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Create an exercise"/>
-    </ContentPage.ToolbarItems>
+    
     <ContentPage.Content>
         <StackLayout Margin="10">
             <Editor Placeholder="Enter name of exercise:"

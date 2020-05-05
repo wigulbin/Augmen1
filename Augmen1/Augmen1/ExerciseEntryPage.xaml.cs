@@ -19,11 +19,9 @@ namespace Augmen1
         public ExerciseEntryPage()
         {
             InitializeComponent();
-            var exerciseInstance = BindingContext as ExerciseInstance;
-            if (exerciseInstance != null)
-                workoutID = exerciseInstance.WorkoutID;
 
-            exercisePicker.ItemsSource = Exercise.getExercises();
+            var exercises = Exercise.getExercises();
+            exercisePicker.ItemsSource = exercises;
         }
 
         async void OnExerciseAddedClicked(object sender, EventArgs e)

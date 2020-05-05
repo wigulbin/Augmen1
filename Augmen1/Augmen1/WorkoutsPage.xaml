@@ -20,17 +20,19 @@
               ItemSelected="OnListViewItemSelected">
         <ListView.GroupHeaderTemplate>
             <DataTemplate>
-                <ViewCell Tapped="OnWorkoutClick">
+                <ViewCell>
                     <FlexLayout Direction="Row"
                                 AlignItems="Start"
                                 JustifyContent="SpaceBetween">
-                        <Label Text="{Binding Name}" FontSize="Large"/>
+                        <Label VerticalTextAlignment="End" Text="{Binding Name}" FontSize="Large"/>
 
                         <FlexLayout FlexLayout.Grow="1" Direction="Row"
                                 AlignItems="End"
                                 JustifyContent="End">
-                            <Button Text="Edit" HorizontalOptions="End" Command="{Binding EditWorkoutCommand}" CommandParameter="{Binding WorkoutID}"/>
-                            <Button Text="Delete" HorizontalOptions="End" Command="{Binding RemoveWorkoutCommand}" CommandParameter="{Binding WorkoutID}"/>
+
+                            <Button x:Name="{Binding WorkoutID}" ClassId="{Binding WorkoutID}" Text="#" Clicked="OnActionSheetSimpleClicked" />
+                            <!--<Button Text="Edit" HorizontalOptions="End" Command="{Binding EditWorkoutCommand}" CommandParameter="{Binding WorkoutID}"/>-->
+                            <!--<Button Text="Delete" HorizontalOptions="End" Command="{Binding RemoveWorkoutCommand}" CommandParameter="{Binding WorkoutID}"/>-->
                         </FlexLayout>
                     </FlexLayout>
 

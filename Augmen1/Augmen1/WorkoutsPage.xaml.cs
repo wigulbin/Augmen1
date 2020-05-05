@@ -16,6 +16,7 @@ namespace Augmen1
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class WorkoutsPage : ContentPage
     {
+        ObservableCollection<GroupedExerciseModel> workoutModels { get; set; }
 
         public WorkoutsPage()
         {
@@ -31,7 +32,7 @@ namespace Augmen1
 
         private void updateWorkouts()
         {
-            var workoutModels = new ObservableCollection<GroupedExerciseModel>();
+            workoutModels = new ObservableCollection<GroupedExerciseModel>();
             var workouts = Generator.getWorkouts();
 
             workouts.ForEach(workout => {
@@ -40,8 +41,8 @@ namespace Augmen1
 
                 workoutModels.Add(groupedExercise);
             });
-            GroupedExerciseModel.workoutModels = workoutModels;
-            listView.ItemsSource = GroupedExerciseModel.workoutModels;
+            workoutModels = workoutModels;
+            listView.ItemsSource = workoutModels;
         }
 
         async protected void OnWorkoutClick(object sender, EventArgs e)
@@ -89,6 +90,28 @@ namespace Augmen1
             {
                 BindingContext = new Exercise()
             });
+        }
+        async void OnActionSheetSimpleClicked(object sender, EventArgs e)
+        {
+            var button = sender as Button;
+            var workoutID = int.Parse(button.ClassId);
+            var workout = Generator.getWorkout(workoutID);
+
+            var action = await DisplayActionSheet(workout.Name, "Cancel", null, "Edit", "Delete");
+            if("Edit".Equals(action))
+            {
+                await Navigation.PushAsync(new WorkoutEntryPage
+                {
+                    BindingContext = Generator.getWorkout(workoutID)
+                });
+            }
+            if("Delete".Equals(action))
+            {
+                var workoutModel = workoutModels.ToList().FirstOrDefault(x => x.WorkoutID == workoutID);
+                int i = workoutModels.IndexOf(workoutModel);
+                workoutModels.RemoveAt(i);
+                Generator.deleteWorkout(workoutID);
+            }
         }
     }
 }

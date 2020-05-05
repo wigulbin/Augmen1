@@ -4,6 +4,7 @@ using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 using Augmen1.Models;
+using Augmen1.Repositories;
 using Xamarin.Forms.Internals;
 
 namespace Augmen1.Testing
@@ -41,29 +42,43 @@ namespace Augmen1.Testing
         private static List<Workout> workouts()
         {
             var workouts = new List<Workout>();
+            var defaultEquip = new List<string>
+            {
+                "Barbell",
+                "Dumbbell",
+                "Bodyweight",
+                "Cable"
+            };
 
-            var squat = new Exercise("Squat", "Barbell", "Legs");
-            var bench = new Exercise("Bench Press", "Dumbbell", "Chest");
-            var pushup = new Exercise("Push Up", "Bodyweight", "Chest");
-            var deadlift = new Exercise("Deadlift", "Barbell", "Legs");
+            if (ExerciseRepository.length() == 0)
+            {
+                ExerciseRepository.add(new Exercise("Squat", defaultEquip, "Legs"));
+                ExerciseRepository.add(new Exercise("Bench Press", defaultEquip, "Chest"));
+                ExerciseRepository.add(new Exercise("Push Up", defaultEquip, "Chest"));
+                ExerciseRepository.add(new Exercise("Deadlift", defaultEquip, "Legs"));
+            }
 
-            var workout = new Workout("Workout1");
+            var workout = new Workout();
+            workout.Name = "Workout 1";
 
-            var ei1 = new ExerciseInstance(workout.WorkoutID, squat, new TimeSpan(0, 1, 30), 225, "Primary");
-            var ei2 = new ExerciseInstance(workout.WorkoutID, bench, new TimeSpan(0, 1, 45), 135, "Secondary");
-            var ei3 = new ExerciseInstance(workout.WorkoutID, pushup, new TimeSpan(0, 1, 0), 0, "Tertiary");
+            var workout2 = new Workout();
+            workout.ListOfExercises = new List<ExerciseInstance>
+            {
+                new ExerciseInstance(workout.WorkoutID, ExerciseRepository.retrieve("Squat"), ExerciseRepository.retrieve("Squat").EquipNeeded[0]),
+                new ExerciseInstance(workout.WorkoutID, ExerciseRepository.retrieve("Bench Press"), new TimeSpan(0, 3, 0), ExerciseRepository.retrieve("Bench Press").EquipNeeded[1]),
+                new ExerciseInstance(workout.WorkoutID, ExerciseRepository.retrieve("Push Up"), ExerciseRepository.retrieve("Push Up").EquipNeeded[2])
+            };
 
-            workout.AddExercise(ei1);
-            workout.AddExercise(ei2);
-            workout.AddExercise(ei3);
+            workout2.ListOfExercises = new List<ExerciseInstance>
+            {
+                new ExerciseInstance(workout2.WorkoutID, ExerciseRepository.retrieve("Deadlift"), ExerciseRepository.retrieve("Deadlift").EquipNeeded[0]),
+                new ExerciseInstance(workout2.WorkoutID, ExerciseRepository.retrieve("Bench Press"), new TimeSpan(0, 3, 0), ExerciseRepository.retrieve("Bench Press").EquipNeeded[0]),
+                new ExerciseInstance(workout2.WorkoutID, ExerciseRepository.retrieve("Squat"), ExerciseRepository.retrieve("Squat").EquipNeeded[1])
+            };
 
-            var workout2 = new Workout("Workout2");
-            workout2.AddExercise(ei2);
-            workout2.AddExercise(ei1);
-            var curWorkout = workout.ListOfExercises;
-            var listofworkouts = new Routine();
-            listofworkouts.AddWorkout(workout);
-            listofworkouts.AddWorkout(workout2);
+
+
+            workout2.Name = "Workout2";
 
             workouts.Add(workout);
             workouts.Add(workout2);

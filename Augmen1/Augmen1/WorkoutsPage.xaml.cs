@@ -75,5 +75,13 @@ namespace Augmen1
                 });
             }
         }
+
+        async void OnExerciseAddedClicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new CreateExercisePage
+            {
+                BindingContext = new Exercise()
+            });
+        }
     }
 }

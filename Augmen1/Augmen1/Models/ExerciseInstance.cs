@@ -1,8 +1,11 @@
-﻿using System;
+﻿using Augmen1.Testing;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Windows.Input;
+using Xamarin.Forms;
 
 namespace Augmen1.Models
 {
@@ -37,17 +40,6 @@ namespace Augmen1.Models
             this.Weight = weight;
             this.TypeOfLift = typeoflift;
             this.BaseExercise = exercise;
-        }
-    }
-
-
-    public class GroupedExerciseModel : ObservableCollection<ExerciseInstance>
-    {
-        public string Name { get; set; }
-
-        public GroupedExerciseModel(string name)
-        {
-            Name = name;
         }
     }
 }

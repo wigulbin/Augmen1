@@ -1,7 +1,10 @@
-﻿using System;
+﻿using Augmen1.Testing;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows.Input;
+using Xamarin.Forms;
 
 namespace Augmen1.Models
 {

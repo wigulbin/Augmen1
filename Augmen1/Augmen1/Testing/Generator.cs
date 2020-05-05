@@ -28,7 +28,15 @@ namespace Augmen1.Testing
 
         public static List<Workout> addWorkout(Workout workout)
         {
-            generatedWorkouts.Add(workout.WorkoutID, workout);
+            if(generatedWorkouts.ContainsKey(workout.WorkoutID))
+                generatedWorkouts[workout.WorkoutID] = workout;
+            else
+                generatedWorkouts.Add(workout.WorkoutID, workout);
+            return getWorkouts();
+        }
+        public static List<Workout> deleteWorkout(int workoutid)
+        {
+            generatedWorkouts.Remove(workoutid);
 
           
             return getWorkouts();

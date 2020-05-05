@@ -16,24 +16,32 @@ namespace Augmen1
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class WorkoutsPage : ContentPage
     {
-        private ObservableCollection<GroupedExerciseModel> workoutModels { get; set; }
 
         public WorkoutsPage()
         {
 
             InitializeComponent();
             updateWorkouts();
-
-            listView.ItemsSource = workoutModels;
         }
         protected override void OnAppearing()
         {
             base.OnAppearing();
-
             updateWorkouts();
+        }
 
-            listView.ItemsSource = workoutModels;
+        private void updateWorkouts()
+        {
+            var workoutModels = new ObservableCollection<GroupedExerciseModel>();
+            var workouts = Generator.getWorkouts();
 
+            workouts.ForEach(workout => {
+                var groupedExercise = new GroupedExerciseModel(workout.Name, workout.WorkoutID);
+                workout.ListOfExercises.ForEach(exercise => groupedExercise.Add(exercise));
+
+                workoutModels.Add(groupedExercise);
+            });
+            GroupedExerciseModel.workoutModels = workoutModels;
+            listView.ItemsSource = GroupedExerciseModel.workoutModels;
         }
 
         async protected void OnWorkoutClick(object sender, EventArgs e)
@@ -43,18 +51,17 @@ namespace Augmen1
                 BindingContext = new Workout()
             });
         }
-
-        private void updateWorkouts()
+        async protected void OnWorkoutEditClick(object sender, EventArgs e)
         {
-            workoutModels = new ObservableCollection<GroupedExerciseModel>();
-            var workouts = Generator.getWorkouts();
-
-            workouts.ForEach(workout => {
-                var groupedExercise = new GroupedExerciseModel(workout.Name);
-                workout.ListOfExercises.ForEach(exercise => groupedExercise.Add(exercise));
-
-                workoutModels.Add(groupedExercise);
+            await Navigation.PushAsync(new WorkoutEntryPage()
+            {
+                BindingContext = new Workout()
             });
+        }
+        protected void OnWorkoutDeleteClick(object sender, EventArgs e)
+        {
+            var workout = new Workout();
+            updateWorkouts();
         }
 
         async void OnWorkoutAddedClicked(object sender, EventArgs e)

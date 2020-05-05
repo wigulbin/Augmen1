@@ -18,7 +18,19 @@
         <ListView.GroupHeaderTemplate>
             <DataTemplate>
                 <ViewCell Tapped="OnWorkoutClick">
-                    <Label Text="{Binding Name}"/>
+                    <FlexLayout Direction="Row"
+                                AlignItems="Start"
+                                JustifyContent="SpaceBetween">
+                        <Label Text="{Binding Name}" FontSize="Large"/>
+
+                        <FlexLayout FlexLayout.Grow="1" Direction="Row"
+                                AlignItems="End"
+                                JustifyContent="End">
+                            <Button Text="Edit" HorizontalOptions="End" Command="{Binding EditWorkoutCommand}" CommandParameter="{Binding WorkoutID}"/>
+                            <Button Text="Delete" HorizontalOptions="End" Command="{Binding RemoveWorkoutCommand}" CommandParameter="{Binding WorkoutID}"/>
+                        </FlexLayout>
+                    </FlexLayout>
+
                 </ViewCell>
             </DataTemplate>
         </ListView.GroupHeaderTemplate>

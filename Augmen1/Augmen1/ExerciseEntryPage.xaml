@@ -6,10 +6,6 @@
              mc:Ignorable="d"
              x:Class="Augmen1.ExerciseEntryPage"
              Title="{Binding ExerciseName}">
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Text="+"
-                     Clicked="OnExerciseAddedClicked" />
-    </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>
 
@@ -28,7 +24,43 @@
                 <Label FontSize="Medium" Text="Excercise:" VerticalTextAlignment="Center"/>
                 <Picker WidthRequest="200" x:Name="exercisePicker" SelectedItem="{Binding ExerciseName, Mode=TwoWay}" HorizontalOptions="Center"/>
             </FlexLayout>
-            
+
+            <FlexLayout 
+                Direction="Row" 
+                FlexLayout.Grow="1"
+                JustifyContent="Center">
+                <Label FontSize="Medium" Text="Type:" VerticalTextAlignment="Center"/>
+                <Picker WidthRequest="200" x:Name="equipPicker" SelectedItem="{Binding EquipNeeded, Mode=TwoWay}" HorizontalOptions="Center"/>
+            </FlexLayout>
+
+            <ListView x:Name="listView"
+              ItemsSource="{Binding SetsReps}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="30" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="20"></RowDefinition>
+                                <RowDefinition Height="20"></RowDefinition>
+                                <RowDefinition Height="20"></RowDefinition>
+                                <RowDefinition Height="20"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <CheckBox x:Name="barbell" />
+                            <Label Grid.Column="1" Text ="Barbell"></Label>
+                            <CheckBox Grid.Row="1" x:Name="dumbell"></CheckBox>
+                            <Label Grid.Row="1" Grid.Column="1" Text="Dumbbell"></Label>
+                            <CheckBox Grid.Row="2" x:Name="bodyweight"></CheckBox>
+                            <Label Grid.Row="2" Grid.Column="1" Text="Bodyweight"></Label>
+                            <CheckBox Grid.Row="3" x:Name="cable"></CheckBox>
+                            <Label Grid.Row="3" Grid.Column="1" Text="Cable"></Label>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
             <Button Text="Save"
                 VerticalOptions="CenterAndExpand"
                 HorizontalOptions="Center"

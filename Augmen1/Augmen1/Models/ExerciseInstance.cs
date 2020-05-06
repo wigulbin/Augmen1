@@ -14,7 +14,7 @@ namespace Augmen1.Models
         public Exercise BaseExercise { get; set; }
         public string ExerciseName => BaseExercise.Name;
         public string ExerciseInstanceName => $"{EquipNeeded} {BaseExercise.Name}";
-        public List<Tuple<int, int>> SetsReps { get; set; }
+        public List<Tuple<int, double, int>> SetsReps { get; set; }
         public double Weight { get; set; }
         public TimeSpan RestTime { get; set; }
         public string EquipNeeded { get; set; }

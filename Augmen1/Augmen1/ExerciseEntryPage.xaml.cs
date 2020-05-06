@@ -1,4 +1,5 @@
 ﻿using Augmen1.Models;
+using Augmen1.Repositories;
 using Augmen1.Testing;
 using System;
 using System.Collections.Generic;
@@ -19,9 +20,28 @@ namespace Augmen1
         public ExerciseEntryPage()
         {
             InitializeComponent();
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            var exerciseInstance = (ExerciseInstance)BindingContext;
+            workoutID = exerciseInstance.WorkoutID;
 
             var exercises = Exercise.getExercises();
             exercisePicker.ItemsSource = exercises;
+            exercisePicker.SelectedItem = exerciseInstance.ExerciseName;
+            exercisePicker.SelectedIndexChanged += (sender, args) =>
+            {
+                if (exercisePicker.SelectedIndex > -1)
+                {
+                    var exerciseName = exercisePicker.SelectedItem.ToString();
+                    equipPicker.ItemsSource = ExerciseRepository.retrieve(exerciseName).EquipNeeded;
+                }
+            };
+
+            equipPicker.ItemsSource = exerciseInstance.BaseExercise.EquipNeeded;
         }
 
         async void OnExerciseAddedClicked(object sender, EventArgs e)

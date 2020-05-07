@@ -3,6 +3,8 @@ using Augmen1.Repositories;
 using Augmen1.Testing;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,6 +18,7 @@ namespace Augmen1
     public partial class ExerciseEntryPage : ContentPage
     {
         private int workoutID = 0;
+        ObservableCollection<Set> exerciseSetList { get; set; }
 
         public ExerciseEntryPage()
         {
@@ -42,9 +45,29 @@ namespace Augmen1
             };
 
             equipPicker.ItemsSource = exerciseInstance.BaseExercise.EquipNeeded;
+            exerciseSetList = new ObservableCollection<Set>();
+            exerciseInstance.SetsReps.ForEach(set => exerciseSetList.Add(set));
+            exerciseSets.ItemsSource = exerciseSetList;
         }
 
+        void OnAddSetClick(object sender, EventArgs e)
+        {
+            var newSet = new Set(exerciseSetList.Count);
+            exerciseSetList.Add(newSet);
+        }
+        void OnDeleteExercise(object sender, EventArgs e)
+        {
+            Debug.WriteLine("Here");
+        }
         async void OnExerciseAddedClicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new ExerciseEntryPage()
+            {
+                BindingContext = new ExerciseInstance(workoutID)
+            });
+        }
+
+        async void OnListViewItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
             await Navigation.PushAsync(new ExerciseEntryPage()
             {
@@ -65,6 +88,11 @@ namespace Augmen1
             }
 
             await Navigation.PopAsync();
+
+        }
+
+        private void exerciseSets_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
 
         }
     }

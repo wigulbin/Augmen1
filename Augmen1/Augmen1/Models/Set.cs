@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Xamarin.Forms;
 
 namespace Augmen1.Models
 {
@@ -17,6 +18,8 @@ namespace Augmen1.Models
             Reps = 8;
             Weight = 135;
             RPE = 0;
+
         }
+
     }
 }

@@ -5,6 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="Augmen1.ExerciseEntryPage"
+             x:Name="SetMainpage"
              Title="{Binding ExerciseName}">
     <ContentPage.Content>
         <StackLayout>
@@ -34,11 +35,20 @@
             </FlexLayout>
 
             <StackLayout Orientation="Vertical" HorizontalOptions="StartAndExpand">
-                <ListView x:Name="exerciseSets" SelectionMode="None" VerticalOptions="FillAndExpand" Margin="0">
-                    <ListView.ItemTemplate>
+                <CollectionView x:Name="exerciseSets" VerticalOptions="FillAndExpand">
+                    
+                    <CollectionView.ItemTemplate>
                         <DataTemplate>
-                            <ViewCell>
-                              
+                            <SwipeView>
+                                <SwipeView.RightItems>
+                                    <SwipeItems Mode="Execute">
+                                        <SwipeItem Command="{Binding BindingContext.DeleteSetCommand, Source={x:Reference SetMainpage}}"
+                                                   CommandParameter="{Binding Index}"
+                                            Text="Delete"
+                                            BackgroundColor="Red" />
+                                    </SwipeItems>
+                                </SwipeView.RightItems>
+
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*" />
@@ -56,16 +66,16 @@
                                     <Entry Keyboard="Numeric" HorizontalOptions="FillAndExpand"  Grid.Column="3" Text="{Binding RPE}"/>
                                     <CheckBox Grid.Column="4"/>
                                 </Grid>
-                            </ViewCell>
+                            </SwipeView>
                         </DataTemplate>
-                    </ListView.ItemTemplate>
-                    <ListView.Footer>
+                    </CollectionView.ItemTemplate>
+                    <CollectionView.Footer>
                         <Button Text="Add Set"
                             VerticalOptions="End"
                             HorizontalOptions="Center"
                             Clicked="OnAddSetClick" />
-                    </ListView.Footer>
-                </ListView>
+                    </CollectionView.Footer>
+                </CollectionView>
             </StackLayout>
 
 

@@ -8,8 +8,9 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Windows.Input;
 using Xamarin.Forms;
+using Xamarin.Forms.Internals;
 using Xamarin.Forms.Xaml;
 
 namespace Augmen1
@@ -19,10 +20,12 @@ namespace Augmen1
     {
         private int workoutID = 0;
         ObservableCollection<Set> exerciseSetList { get; set; }
+        public ICommand DeleteSetCommand { get; private set; }
 
         public ExerciseEntryPage()
         {
             InitializeComponent();
+            DeleteSetCommand = new Command<int>(DeleteSet);
         }
 
         protected override void OnAppearing()
@@ -48,11 +51,12 @@ namespace Augmen1
             exerciseSetList = new ObservableCollection<Set>();
             exerciseInstance.SetsReps.ForEach(set => exerciseSetList.Add(set));
             exerciseSets.ItemsSource = exerciseSetList;
+            BindingContext = this;
         }
 
         void OnAddSetClick(object sender, EventArgs e)
         {
-            var newSet = new Set(exerciseSetList.Count);
+            var newSet = new Set(exerciseSetList.Count + 1);
             exerciseSetList.Add(newSet);
         }
         void OnDeleteExercise(object sender, EventArgs e)
@@ -88,6 +92,18 @@ namespace Augmen1
             }
 
             await Navigation.PopAsync();
+
+        }
+
+        void DeleteSet(int index)
+        {
+            exerciseSetList.RemoveAt(index-1);
+            for (var i = 0; i < exerciseSetList.Count; i++)
+            {
+                var set = exerciseSetList[i];
+                set.Index = i + 1;
+                exerciseSetList[i] = set;
+            }
 
         }
 

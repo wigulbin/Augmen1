@@ -1,4 +1,5 @@
 ﻿using Augmen1.Models;
+using Augmen1.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -15,8 +16,7 @@ namespace Augmen1
     public partial class StartWorkout : ContentPage
     {
         private Workout workout;
-        ObservableCollection<ExerciseInstance> exerciseInstanceList { get; set; }
-        Dictionary<int, ObservableCollection<Set>> exerciseSetDictionary { get; set; }
+        ObservableCollection<WorkoutViewModel> exerciseInstanceSetList { get; set; }
         public StartWorkout()
         {
             InitializeComponent();
@@ -29,14 +29,15 @@ namespace Augmen1
 
             var exercises = Exercise.getExercises();
 
-            exerciseInstanceList = new ObservableCollection<ExerciseInstance>();
+            exerciseInstanceSetList = new ObservableCollection<WorkoutViewModel>();
+
             workout.ListOfExercises.ForEach(exercise => {
-                exerciseInstanceList.Add(exercise);
-                exerciseSetDictionary.Add(exercise.ExerciseID, new ObservableCollection<Set>());
-                exercise.SetsReps.ForEach(set => exerciseSetDictionary[exercise.ExerciseID].Add(set));
+                var workoutViewModel = new WorkoutViewModel();
+                workoutViewModel.Exercise = exercise;
+                exercise.SetsReps.ForEach(set => workoutViewModel.Add(set));
             });
 
-            exerciseSetView.ItemsSource = exerciseSetList;
+            exerciseSetView.ItemsSource = exerciseInstanceSetList;
 
             BindingContext = this;
         }

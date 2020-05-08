@@ -21,6 +21,9 @@ namespace Augmen1
         private int workoutID = 0;
         ObservableCollection<Set> exerciseSetList { get; set; }
         public ICommand DeleteSetCommand { get; private set; }
+        public ExerciseInstance exerciseInstance { get; set; }
+
+        public string ExerciseName { get; private set; }
 
         public ExerciseEntryPage()
         {
@@ -32,25 +35,15 @@ namespace Augmen1
         {
             base.OnAppearing();
 
-            var exerciseInstance = (ExerciseInstance)BindingContext;
+            exerciseInstance = (ExerciseInstance)BindingContext;
             workoutID = exerciseInstance.WorkoutID;
 
             var exercises = Exercise.getExercises();
-            exercisePicker.ItemsSource = exercises;
-            exercisePicker.SelectedItem = exerciseInstance.ExerciseName;
-            exercisePicker.SelectedIndexChanged += (sender, args) =>
-            {
-                if (exercisePicker.SelectedIndex > -1)
-                {
-                    var exerciseName = exercisePicker.SelectedItem.ToString();
-                    equipPicker.ItemsSource = ExerciseRepository.retrieve(exerciseName).EquipNeeded;
-                }
-            };
 
-            equipPicker.ItemsSource = exerciseInstance.BaseExercise.EquipNeeded;
             exerciseSetList = new ObservableCollection<Set>();
             exerciseInstance.SetsReps.ForEach(set => exerciseSetList.Add(set));
             exerciseSets.ItemsSource = exerciseSetList;
+            ExerciseName = exerciseInstance.ExerciseName;
             BindingContext = this;
         }
 
@@ -80,7 +73,7 @@ namespace Augmen1
         }
         async void OnSaveExercise(object sender, EventArgs e)
         {
-            var exerciseInstance = (ExerciseInstance)BindingContext;
+            var exerciseInstance = (ExerciseEntryPage)BindingContext;
 
             if (string.IsNullOrWhiteSpace(exerciseInstance.ExerciseName))
             {

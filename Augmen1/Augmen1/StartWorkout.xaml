@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="Augmen1.StartWorkout">
+    <ContentPage.Content>
+        <StackLayout>
+        <StackLayout Orientation="Vertical" HorizontalOptions="StartAndExpand">
+            <CollectionView x:Name="exerciseSet" VerticalOptions="FillAndExpand">
+
+                <CollectionView.Header>
+                    <Label Text="{Binding BindingContext.exerciseInstance.ExerciseName, Source={x:Reference SetMainpage}"/>
+                </CollectionView.Header>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <SwipeView>
+                            <SwipeView.RightItems>
+                                <SwipeItems Mode="Execute">
+                                    <SwipeItem Command="{Binding BindingContext.DeleteSetCommand, Source={x:Reference SetMainpage}}"
+                                                   CommandParameter="{Binding Index}"
+                                            Text="Delete"
+                                            BackgroundColor="Red" />
+                                </SwipeItems>
+                            </SwipeView.RightItems>
+
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Label VerticalTextAlignment="Center" HorizontalOptions="End" Grid.Column="0" Text="{Binding Index}"/>
+                                <Entry Keyboard="Numeric" HorizontalOptions="FillAndExpand"  Grid.Column="1" Text ="{Binding Reps}"/>
+                                <Entry Keyboard="Numeric" HorizontalOptions="FillAndExpand"  Grid.Column="2" Text="{Binding Weight}"/>
+                                <Entry Keyboard="Numeric" HorizontalOptions="FillAndExpand"  Grid.Column="3" Text="{Binding RPE}"/>
+                                <CheckBox Grid.Column="4"/>
+                            </Grid>
+                        </SwipeView>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+                <CollectionView.Footer>
+                    <Button Text="Add Set"
+                            VerticalOptions="End"
+                            HorizontalOptions="Center"
+                            Clicked="OnAddSetClick" />
+                </CollectionView.Footer>
+            </CollectionView>
+        </StackLayout>
+
+
+        <Button Text="Save"
+                VerticalOptions="CenterAndExpand"
+                HorizontalOptions="Center"
+                Clicked="OnSaveExercise" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -18,22 +18,6 @@
                 <TimePicker Time="{Binding RestTime}" />
             </FlexLayout>
 
-            <FlexLayout 
-                Direction="Row" 
-                FlexLayout.Grow="1"
-                JustifyContent="Center">
-                <Label FontSize="Medium" Text="Excercise:" VerticalTextAlignment="Center"/>
-                <Picker WidthRequest="200" x:Name="exercisePicker" SelectedItem="{Binding ExerciseName, Mode=TwoWay}" HorizontalOptions="Center"/>
-            </FlexLayout>
-
-            <FlexLayout 
-                Direction="Row" 
-                FlexLayout.Grow="1"
-                JustifyContent="Center">
-                <Label FontSize="Medium" Text="Type:" VerticalTextAlignment="Center"/>
-                <Picker WidthRequest="200" x:Name="equipPicker" SelectedItem="{Binding EquipNeeded, Mode=TwoWay}" HorizontalOptions="Center"/>
-            </FlexLayout>
-
             <StackLayout Orientation="Vertical" HorizontalOptions="StartAndExpand">
                 <CollectionView x:Name="exerciseSets" VerticalOptions="FillAndExpand">
                     
@@ -55,7 +39,6 @@
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="*" />
                                     </Grid.ColumnDefinitions>
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="*"></RowDefinition>
@@ -64,7 +47,6 @@
                                     <Entry Keyboard="Numeric" HorizontalOptions="FillAndExpand"  Grid.Column="1" Text ="{Binding Reps}"/>
                                     <Entry Keyboard="Numeric" HorizontalOptions="FillAndExpand"  Grid.Column="2" Text="{Binding Weight}"/>
                                     <Entry Keyboard="Numeric" HorizontalOptions="FillAndExpand"  Grid.Column="3" Text="{Binding RPE}"/>
-                                    <CheckBox Grid.Column="4"/>
                                 </Grid>
                             </SwipeView>
                         </DataTemplate>

@@ -30,9 +30,8 @@
                                 AlignItems="End"
                                 JustifyContent="End">
 
+                            <Button x:Name="{Binding WorkoutID}" ClassId="{Binding WorkoutID}" Text="Start" Clicked="OnActionStartWorkout" />
                             <Button x:Name="{Binding WorkoutID}" ClassId="{Binding WorkoutID}" Text="#" Clicked="OnActionSheetSimpleClicked" />
-                            <!--<Button Text="Edit" HorizontalOptions="End" Command="{Binding EditWorkoutCommand}" CommandParameter="{Binding WorkoutID}"/>-->
-                            <!--<Button Text="Delete" HorizontalOptions="End" Command="{Binding RemoveWorkoutCommand}" CommandParameter="{Binding WorkoutID}"/>-->
                         </FlexLayout>
                     </FlexLayout>
 

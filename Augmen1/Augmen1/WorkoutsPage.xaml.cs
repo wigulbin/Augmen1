@@ -113,5 +113,15 @@ namespace Augmen1
                 Generator.deleteWorkout(workoutID);
             }
         }
+        async void OnActionStartWorkout(object sender, EventArgs e)
+        {
+            var button = sender as Button;
+            var workoutID = int.Parse(button.ClassId);
+            var workout = Generator.getWorkout(workoutID);
+            await Navigation.PushAsync(new StartWorkout
+            {
+                BindingContext = Generator.getWorkout(workoutID)
+            });
+        }
     }
 }

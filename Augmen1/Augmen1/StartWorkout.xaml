@@ -8,7 +8,7 @@
     <ContentPage.Content>
         <StackLayout>
         <StackLayout Orientation="Vertical" HorizontalOptions="StartAndExpand">
-                <ListView x:Name="listView"
+                <ListView x:Name="exerciseSetView"
                     IsGroupingEnabled="True"
                     ItemSelected="OnListViewItemSelected">
                     <ListView.GroupHeaderTemplate>
@@ -23,8 +23,8 @@
                                 AlignItems="End"
                                 JustifyContent="End">
 
-                                        <Button x:Name="{Binding WorkoutID}" ClassId="{Binding WorkoutID}" Text="Start" Clicked="OnActionStartWorkout" />
-                                        <Button x:Name="{Binding WorkoutID}" ClassId="{Binding WorkoutID}" Text="#" Clicked="OnActionSheetSimpleClicked" />
+                                        <!--<Button x:Name="{Binding WorkoutID}" ClassId="{Binding WorkoutID}" Text="Start" Clicked="OnActionStartWorkout" />-->
+                                        <!--<Button x:Name="{Binding WorkoutID}" ClassId="{Binding WorkoutID}" Text="#" Clicked="OnActionSheetSimpleClicked" />-->
                                     </FlexLayout>
                                 </FlexLayout>
 
@@ -32,7 +32,7 @@
                         </DataTemplate>
                     </ListView.GroupHeaderTemplate>
                     <ListView.Header>
-                        <Label Text="{Binding BindingContext.exerciseInstance.ExerciseName, Source={x:Reference SetMainpage}"/>
+                        <Label Text="{Binding BindingContext.exerciseInstance.ExerciseName, Source={x:Reference SetMainpage}}"/>
                     </ListView.Header>
                     <ListView.ItemTemplate>
                         <DataTemplate>
@@ -67,19 +67,19 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                     <ListView.Footer>
-                        <Button Text="Add Set"
+                        <!--<Button Text="Add Set"
                             VerticalOptions="End"
                             HorizontalOptions="Center"
-                            Clicked="OnAddSetClick" />
+                            Clicked="OnAddSetClick" />-->
                     </ListView.Footer>
                 </ListView>
             </StackLayout>
 
 
-        <Button Text="Save"
+        <!--<Button Text="Save"
                 VerticalOptions="CenterAndExpand"
                 HorizontalOptions="Center"
-                Clicked="OnSaveExercise" />
+                Clicked="OnSaveExercise" />-->
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

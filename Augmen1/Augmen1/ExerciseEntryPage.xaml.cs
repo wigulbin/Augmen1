@@ -49,7 +49,7 @@ namespace Augmen1
 
         void OnAddSetClick(object sender, EventArgs e)
         {
-            var newSet = new Set(exerciseSetList.Count + 1);
+            var newSet = new Set(exerciseSetList.Count + 1, exerciseInstance.ExerciseID);
             exerciseSetList.Add(newSet);
         }
         void OnDeleteExercise(object sender, EventArgs e)

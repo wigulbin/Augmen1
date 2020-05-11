@@ -40,9 +40,9 @@ namespace Augmen1.Models
             this.BaseExercise = exercise;
 
             this.SetsReps = new List<Set>(){
-                new Set(1),
-                new Set(2),
-                new Set(3)
+                new Set(1, this.ExerciseID),
+                new Set(2, this.ExerciseID),
+                new Set(3, this.ExerciseID)
             };
         }
 
@@ -53,6 +53,12 @@ namespace Augmen1.Models
             this.RestTime = exercise.DefaultRestTime;
             this.EquipNeeded = EquipNeeded;
             this.BaseExercise = exercise;
+
+            this.SetsReps = new List<Set>(){
+                new Set(1, this.ExerciseID),
+                new Set(2, this.ExerciseID),
+                new Set(3, this.ExerciseID)
+            };
         }
 
     }

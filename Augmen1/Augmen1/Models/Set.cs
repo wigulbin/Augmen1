@@ -11,13 +11,15 @@ namespace Augmen1.Models
         public int Reps { get; set; }
         public double Weight { get; set; }
         public int RPE { get; set; }
+        public int ExerciseID { get; set; }
 
-        public Set(int index)
+        public Set(int index, int exerciseID)
         {
             Index = index;
             Reps = 8;
             Weight = 135;
             RPE = 0;
+            ExerciseID = exerciseID;
 
         }
 
